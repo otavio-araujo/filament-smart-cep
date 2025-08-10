@@ -73,9 +73,10 @@ class SmartCep extends TextInput
 
         $set($this->countryCodeField, 'BR');
 
-        $nextFocusTargetField = str_replace($component->statePath, $this->nextFocusField, $component->getKey());
-
-        $livewire->js("document.getElementById('{$nextFocusTargetField}').focus()");
+        if ($component->statePath && $component->getKey()) {
+            $nextFocusTargetField = str_replace($component->statePath, $this->nextFocusField, $component->getKey());
+            $livewire->js("document.getElementById('{$nextFocusTargetField}').focus()");
+        }
 
     }
 

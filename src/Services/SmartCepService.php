@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Http;
 
 final class SmartCepService
 {
+    /**
+     * @return array<string>
+     */
     public static function get(string $cep): array
     {
         $response = [];
@@ -79,6 +82,10 @@ final class SmartCepService
         return $response;
     }
 
+    /**
+     * @param  array<string>  $responseData
+     * @return array<string, mixed>
+     */
     private static function formatResponseData(array $responseData, string $serviceName): array
     {
         if ($serviceName === 'viacep') {
