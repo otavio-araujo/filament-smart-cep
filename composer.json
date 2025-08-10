@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.2|^8.3",
         "filament/forms": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
@@ -51,6 +51,10 @@
         }
     },
     "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench icons:cache",
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ],
         "analyse": "phpstan analyse",
         "lint": "pint",
         "refactor": "rector",
