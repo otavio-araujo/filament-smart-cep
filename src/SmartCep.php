@@ -2,4 +2,4 @@
 
 namespace OtavioAraujo\FilamentSmartCep;
 
-class FilamentSmartCep {}
+class SmartCep {}
