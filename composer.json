@@ -1,30 +1,28 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "otavio-araujo/filament-smart-cep",
+    "description": "A FilamentPHP plugin that validates Brazilian postal codes (CEP) and automatically fills address fields (street, neighborhood, city, state, country) using ViaCEP as the primary source, with multiple API fallbacks for reliability.",
     "keywords": [
-        ":vendor_name",
+        "otavio-araujo",
         "laravel",
         "filamentphp",
-        ":package_slug"
+        "filament-smart-cep"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/otavio-araujo/filament-smart-cep",
     "support": {
-        "issues": "https://github.com/:vendor_slug/:package_slug/issues",
-        "source": "https://github.com/:vendor_slug/:package_slug"
+        "issues": "https://github.com/otavio-araujo/filament-smart-cep/issues",
+        "source": "https://github.com/otavio-araujo/filament-smart-cep"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Otávio Araújo",
+            "email": "otavio_araujo@hotmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.2",
-        "filament/filament": "^4.0",
         "filament/forms": "^4.0",
-        "filament/tables": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
@@ -39,18 +37,17 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
-        "rector/rector": "^2.0",
-        "spatie/laravel-ray": "^1.26"
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "OtavioAraujo\\FilamentSmartCep\\": "src/",
+            "OtavioAraujo\\FilamentSmartCep\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "OtavioAraujo\\FilamentSmartCep\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -65,10 +62,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "OtavioAraujo\\FilamentSmartCep\\FilamentSmartCepServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "FilamentSmartCep": "OtavioAraujo\\FilamentSmartCep\\Facades\\FilamentSmartCep"
             }
         }
     },
