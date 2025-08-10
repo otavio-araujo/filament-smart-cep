@@ -8,6 +8,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component as Livewire;
 
@@ -34,22 +36,48 @@ class SmartCep extends TextInput
     private string $streetField = 'street';
 
     /**
-     * @throws \Illuminate\Http\Client\ConnectionException
-     * @throws \Illuminate\Http\Client\RequestException
+     * @throws ConnectionException
+     * @throws RequestException
      */
-    public function getCep(Component $component, Set $set): void
+    public function getCep(Livewire $livewire, Component $component, Set $set): void
     {
-        $request = Http::get('https://viacep.com.br/ws/' . $component->getState() . '/json/')
+        $cepResponse = Http::get('https://viacep.com.br/ws/' . $component->getState() . '/json/')
             ->throw()
             ->json();
 
-        $set('street', $request['logradouro']);
-        $set('neighborhood', $request['bairro']);
-        $set('city', $request['localidade']);
-        $set('state', $request['estado']);
-        $set('state_code', $request['uf']);
-        $set('country', 'BRASIL');
-        $set('country_code', 'BRA');
+        if ($cepResponse === []) {
+            $livewire->js("document.getElementById('{$component->getKey()}').focus()");
+
+            return;
+        }
+
+        if (! empty($cepResponse['logradouro'])) {
+            $set($this->streetField, $cepResponse['logradouro']);
+        }
+
+        if (! empty($cepResponse['bairro'])) {
+            $set($this->neighborhoodField, $cepResponse['bairro']);
+        }
+
+        if (! empty($cepResponse['localidade'])) {
+            $set($this->cityField, $cepResponse['localidade']);
+        }
+
+        if (! empty($cepResponse['estado'])) {
+            $set($this->stateField, $cepResponse['estado']);
+        }
+
+        if (! empty($cepResponse['uf'])) {
+            $set($this->stateCodeField, $cepResponse['uf']);
+        }
+
+        if (! empty($cepResponse['ibge'])) {
+            $set($this->ibgeCodeField, $cepResponse['ibge']);
+        }
+
+        $set($this->countryField, 'Brasil');
+
+        $set($this->countryCodeField, 'BR');
     }
 
     protected function setUp(): void
@@ -68,9 +96,9 @@ class SmartCep extends TextInput
                     ->icon(fn () => $this->actionIcon)
                     ->action(function (Livewire $livewire, Component $component, Set $set) {
                         $livewire->validateOnly($component->getStatePath());
-                        $this->getCep($component, $set);
+                        $this->getCep($livewire, $component, $set);
                     })
-            : null;
+                : null;
         });
 
         $this->suffixAction(function (): ?Action {
@@ -79,7 +107,7 @@ class SmartCep extends TextInput
                     ->icon(fn () => $this->actionIcon)
                     ->action(function (Livewire $livewire, Component $component, Set $set) {
                         $livewire->validateOnly($component->getStatePath());
-                        $this->getCep($component, $set);
+                        $this->getCep($livewire, $component, $set);
                     })
                 : null;
         });
