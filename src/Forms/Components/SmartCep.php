@@ -20,7 +20,7 @@ class SmartCep extends TextInput
         $this->suffixAction(
             Action::make('findCep')
                 ->icon('heroicon-s-magnifying-glass')
-                ->action(fn () => Notification::make()->success()->title('Buscando CEP...')->send())
+                ->action(fn () => Notification::make()->success()->title('Buscando CEP....')->send())
         );
     }
 }
