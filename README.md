@@ -164,8 +164,14 @@ public static function configure(Schema $schema): Schema
 
 ---
 
-## 🧑‍🔬 Testing
+## 👨‍💻 Code Quality
 
+```bash
+composer analyse
+```
+```bash
+composer lint
+```
 ```bash
 composer test
 ```
