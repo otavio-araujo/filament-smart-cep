@@ -26,6 +26,7 @@
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^8.0",
@@ -41,8 +42,7 @@
     },
     "autoload": {
         "psr-4": {
-            "OtavioAraujo\\FilamentSmartCep\\": "src/",
-            "OtavioAraujo\\FilamentSmartCep\\Database\\Factories\\": "database/factories/"
+            "OtavioAraujo\\FilamentSmartCep\\": "src/"
         }
     },
     "autoload-dev": {
@@ -63,10 +63,7 @@
         "laravel": {
             "providers": [
                 "OtavioAraujo\\FilamentSmartCep\\FilamentSmartCepServiceProvider"
-            ],
-            "aliases": {
-                "FilamentSmartCep": "OtavioAraujo\\FilamentSmartCep\\Facades\\FilamentSmartCep"
-            }
+            ]
         }
     },
     "config": {
