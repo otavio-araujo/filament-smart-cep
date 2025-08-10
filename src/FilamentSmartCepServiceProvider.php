@@ -10,11 +10,11 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use OtavioAraujo\FilamentSmartCep\Commands\FilamentSmartCepCommand;
+use OtavioAraujo\FilamentSmartCep\Testing\TestsFilamentSmartCep;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use OtavioAraujo\FilamentSmartCep\Commands\FilamentSmartCepCommand;
-use OtavioAraujo\FilamentSmartCep\Testing\TestsFilamentSmartCep;
 
 class FilamentSmartCepServiceProvider extends PackageServiceProvider
 {
