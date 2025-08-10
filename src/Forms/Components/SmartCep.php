@@ -8,10 +8,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\RequestException;
-use Illuminate\Support\Facades\Http;
 use Livewire\Component as Livewire;
+use OtavioAraujo\FilamentSmartCep\Services\SmartCepService;
 
 class SmartCep extends TextInput
 {
@@ -29,21 +27,17 @@ class SmartCep extends TextInput
 
     private string $neighborhoodField = 'neighborhood';
 
+    private string $nextFocusField = 'number';
+
     private string $stateField = 'state';
 
     private string $stateCodeField = 'state_code';
 
     private string $streetField = 'street';
 
-    /**
-     * @throws ConnectionException
-     * @throws RequestException
-     */
     public function getCep(Livewire $livewire, Component $component, Set $set): void
     {
-        $cepResponse = Http::get('https://viacep.com.br/ws/' . $component->getState() . '/json/')
-            ->throw()
-            ->json();
+        $cepResponse = SmartCepService::get($this->getState());
 
         if ($cepResponse === []) {
             $livewire->js("document.getElementById('{$component->getKey()}').focus()");
@@ -51,33 +45,38 @@ class SmartCep extends TextInput
             return;
         }
 
-        if (! empty($cepResponse['logradouro'])) {
-            $set($this->streetField, $cepResponse['logradouro']);
+        if (! empty($cepResponse['street'])) {
+            $set($this->streetField, $cepResponse['street']);
         }
 
-        if (! empty($cepResponse['bairro'])) {
-            $set($this->neighborhoodField, $cepResponse['bairro']);
+        if (! empty($cepResponse['neighborhood'])) {
+            $set($this->neighborhoodField, $cepResponse['neighborhood']);
         }
 
-        if (! empty($cepResponse['localidade'])) {
-            $set($this->cityField, $cepResponse['localidade']);
+        if (! empty($cepResponse['city'])) {
+            $set($this->cityField, $cepResponse['city']);
         }
 
-        if (! empty($cepResponse['estado'])) {
-            $set($this->stateField, $cepResponse['estado']);
+        if (! empty($cepResponse['state'])) {
+            $set($this->stateField, $cepResponse['state']);
         }
 
-        if (! empty($cepResponse['uf'])) {
-            $set($this->stateCodeField, $cepResponse['uf']);
+        if (! empty($cepResponse['state_code'])) {
+            $set($this->stateCodeField, $cepResponse['state_code']);
         }
 
-        if (! empty($cepResponse['ibge'])) {
-            $set($this->ibgeCodeField, $cepResponse['ibge']);
+        if (! empty($cepResponse['ibge_code'])) {
+            $set($this->ibgeCodeField, $cepResponse['ibge_code']);
         }
 
         $set($this->countryField, 'Brasil');
 
         $set($this->countryCodeField, 'BR');
+
+        $nextFocusTargetField = str_replace($component->statePath, $this->nextFocusField, $component->getKey());
+
+        $livewire->js("document.getElementById('{$nextFocusTargetField}').focus()");
+
     }
 
     protected function setUp(): void
@@ -180,6 +179,13 @@ class SmartCep extends TextInput
     public function bindStreetField(string $streetField): self
     {
         $this->streetField = $streetField;
+
+        return $this;
+    }
+
+    public function nextFocusField(string $targetField): self
+    {
+        $this->nextFocusField = $targetField;
 
         return $this;
     }
