@@ -95,6 +95,7 @@ public static function configure(Schema $schema): Schema
     }
 ```
 ![Basic Usage](https://raw.githubusercontent.com/otavio-araujo/filament-smart-cep/4b75fca50f5b29ccf571389cd329c8be28b8f46f/art/4x/basic_usage.png)
+
 ___
 
 ## 🏷️ Using Custom Field Names
@@ -144,6 +145,7 @@ public static function configure(Schema $schema): Schema
             ]);
     }
 ```
+![Basic Usage](https://raw.githubusercontent.com/otavio-araujo/filament-smart-cep/4.x/art/4x/custom_icon_and_action_position.png?raw=true)
 
 ---
 
