@@ -1,5 +1,7 @@
 # Filament Smart CEP
 
+![Basic Usage](https://raw.githubusercontent.com/otavio-araujo/filament-smart-cep/4.x/art/4x/hero.png)
+
 **Filament Smart CEP** is a plugin for **FilamentPHP v4** that validates Brazilian postal codes (CEP) and automatically fills address fields with accurate data.
 It uses **[ViaCEP](https://viacep.com.br/)** as the primary API, with multiple backup providers to ensure reliability and uptime.
 
