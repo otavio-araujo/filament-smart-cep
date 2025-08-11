@@ -2,10 +2,10 @@
     "name": "otavio-araujo/filament-smart-cep",
     "description": "A FilamentPHP plugin that validates Brazilian postal codes (CEP) and automatically fills address fields (street, neighborhood, city, state, country) using ViaCEP as the primary source, with multiple API fallbacks for reliability.",
     "keywords": [
-        "otavio-araujo",
+        "cep",
         "laravel",
-        "filamentphp",
-        "filament-smart-cep"
+        "filament",
+        "brazil"
     ],
     "homepage": "https://github.com/otavio-araujo/filament-smart-cep",
     "support": {
